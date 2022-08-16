@@ -2,10 +2,12 @@ class Car
 {
 	constructor( x, y, width, height )
 	{
-		this.x      = x;
-		this.y      = y;
-		this.width  = width;
-		this.height = height;
+		this.x         = x;
+		this.y         = y;
+		this.width     = width;
+		this.height    = height;
+		this.image     = new Image( width, height );
+		this.image.src = "app/resources/images/pngwing.com.png";
 
 		this.acceleration = 0.2;
 		this.speed 		  = 0; 
@@ -16,20 +18,24 @@ class Car
 		this.controls = new Controls();
 	}
 
+	getImage()
+	{
+		return this.image;
+	}
+
 	createStructure( ctx )
 	{
 		ctx.save();
 		ctx.translate( this.x, this.y );
 		ctx.rotate( -this.angle );
 
-		ctx.beginPath();
-		ctx.rect(
-			this.x-this.width/2,
-			this.y-this.height/2,
+		ctx.drawImage(
+			this.image,
+			-this.width/2,
+			-this.height/2,
 			this.width,
 			this.height
 		);
-		ctx.fill();
 
 		ctx.restore();
 	}
